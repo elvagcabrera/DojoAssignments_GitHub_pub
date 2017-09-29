@@ -1,0 +1,44 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <title>API by Elva</title>
+    <meta charset="utf-8">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+
+    <script>
+        $(document).ready(function(){
+
+            for (var pok = 1; pok <= 151; pok++){
+                 $('h1').after('<img src="http://pokeapi.co/media/img/' + pok + '.png" id="' + pok + '">');
+              }
+
+            $('#pokemon').on('click','img',function(){
+                $.get('http://pokeapi.co/api/v1/pokemon/' + $(this).attr('id') + '/',
+                    function(res){
+                        var htmlstr = "";
+                        htmlstr += '<h1>' + res.name + '</h1>';
+                        htmlstr += '<img src="http://pokeapi.co/media/img/' + res.pkdx_id + '.png">';
+                        htmlstr += '<h3>Types</h3><ul>';
+                            for(var i = 0; i < res.types.length; ++i){
+                                htmlstr += '<li>' + res.types[i].name + '</li>';
+                            }
+                        htmlstr += '</ul><h3>Height</h3><p>' + res.height + '</p>';
+                        htmlstr += '<h3>Weight</h3><p>' + res.weight + '</p>';
+                        $('#pokedex').html(htmlstr);
+                    });
+                  
+                });
+
+            });
+
+    </script>
+  </head>
+  <body>
+    <div id="pokemon">
+      <h1>Pokemon</h1>
+    </div>
+    <div id="pokedex">
+    </div>   
+  </body>
+</html>
