@@ -1,0 +1,44 @@
+<HTML>
+	<header>
+		<title>Call Back Example</title>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+		<script type="text/javascript">
+
+			function attach_handlers()
+			{
+				$('.alert').click(function(){
+					alert('you clicked on me!');
+				});
+			}
+
+			$(document).ready(function(){
+				
+				attach_handlers();
+				$('.new_btn').click(function(){
+					$('#buttons').append("<button class='alert'>I am a dynamically genereated button</button>");
+					attach_handlers();
+				});
+
+				// $(document).on('click', '.alert', function(){
+				// 	alert('you clicked me!');
+				// })
+
+				//A callback is nothing more than calling a function at some time from within another function
+			});
+		</script>
+	</header>
+
+
+<body>
+	<h3>Static Content!</h3>
+	<div>
+		<button class="alert">click me for a message!</button>
+		<button class="alert">click me for a message!</button>
+		<button class="alert">click me for a message!</button>
+		<button class="new_btn">click me for a new button!</button>
+	</div>
+	<h3>Dynamically rendered content</h3>
+	<div id="buttons"></div>
+</body>
+
+</HTML>
