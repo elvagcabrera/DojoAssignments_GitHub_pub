@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Weather API</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+	<script type="text/javascript">
+		$(document).ready(function() {
+		    $('form').submit(function() {
+		        var apiKey = '6313cd548c9b316e749f17d718c610da';
+		        var city = $('#city').val();
+		        var url ='http://api.openweathermap.org/data/2.5/weather?q=' + city + 'uk&&appid=' + apiKey;
+		   
+		        $.get(url, function(res) {
+		            var str = '';
+		            str += "<p>Name: " + res['name'] + "</p>";
+		            var tempKelvin = res['main']['temp'];
+		            var tempFar = (tempKelvin) * (9/5) - 459.67;
+		            var temp = tempFar.toFixed();
+		            str += "<p> Temperature: " + temp + " &deg;F</p>";
+		            $('#results').html(str);
+		        }, 'json');
+		        return false;
+		    });
+		});
+</script>
+
+</head>
+<body>
+	
+	<form action="process.php" id="form">
+		<input type="text" name="Search" id="city">
+		<input type="Submit" value="submit">
+	</form>
+	
+
+	<div id="results"></div>
+
+</body>
+</html>
